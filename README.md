@@ -33,17 +33,17 @@ After setting up the general location of the city buildings, I tried to add some
           
 Then I tried to make some of the buildings and flying machines rotate and self-pass to make the whole city work.
 
+## Autobiography of objects
 // torus.rotation.y+= 0.05;   
 
-Autobiography of objects
 
+## Revolution of objects
 // angle += 0.005;
    var x = 25 * Math.cos(angle);
    var y = 25 * Math.cos(angle);
    var z = 25 * Math.sin(angle);
   sphere.position.set(x/8-30,y+90,z*2);
   
-Revolution of objects
 
 By now the city was taking shape and I tried to add some cyberpunk style sounds by creating a maxiSample object using the parts of the sound I talked about in week two, loading two samples, using the maxiSample.play() function to manipulate the sound and triggering the per beat via maxiClock based on the BPM.
 
