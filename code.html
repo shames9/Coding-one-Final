@@ -1,0 +1,481 @@
+<html>
+
+<head>
+ <script src = "https://mimicproject.com/libs/maximilian.v.0.1.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+<script src = "https://mimicproject.com/libs/maximilian.js"></script>
+<script src = "orbitControls.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta charset="utf-8">
+	<style>
+		body {
+			margin: 0px;
+			background-color: #000000;
+			overflow: hidden;
+          
+		}
+	</style>
+  	<script src="./threejs/three.min.js"></script>
+  	<script src="./threejs/OrbitControls.js"></script>
+</head>
+
+<body>
+   <canvas></canvas>
+	<script>
+    
+	  var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 2500); 
+  	  var scene = new THREE.Scene();
+      var intersectsArr = []
+      var cloud = cloudFun()
+      scene.add(cloud)
+    
+      let maxi=maximilian();
+  let audio=new maxi.maxiAudio();
+  var osc1 = new maxi.maxiOsc();
+  var osc2 = new maxi.maxiOsc();
+  
+
+
+  let mySample=new maxi.maxiSample();
+  let myClock=new maxi.maxiClock();
+   
+      
+       audio.init();
+  
+  audio.loadSample('sebo3.wav', mySample);
+   
+      
+       myClock.setTempo(120);
+  myClock.setTicksPerBeat(4);
+  
+  audio.play=function(){
+  myClock.ticker();
+    
+   
+
+        if (myClock.tick && myClock.playHead%64===0) {
+            mySample.trigger(); 
+         
+        }
+    
+     var out=mySample.playOnce();
+  
+  return out;
+  }
+    
+      // object 1
+      var geometry = new THREE.ConeGeometry( 10, 28, 16 );
+      var myTextureLoader = new THREE.TextureLoader();
+      var myTexture = myTextureLoader.load('ground.gif');
+      var material = new THREE.MeshBasicMaterial({ map: myTexture});
+      var torusknot = new THREE.Mesh(geometry, material);
+      
+      // obiect 2
+
+      var geometry2 = new THREE.SphereGeometry( 10, 32, 16 );
+      var myTextureLoader2 = new THREE.TextureLoader();
+      var myTexture2 = myTextureLoader2.load('ground.gif');
+      var material2 = new THREE.MeshBasicMaterial({map: myTexture2});
+      var sphere = new THREE.Mesh(geometry2, material2);
+     
+      // object 3
+      
+      var geometry3 = new THREE.TorusGeometry( 16, 2, 16, 50 );
+      var myTextureLoader3 = new THREE.TextureLoader();
+      var myTexture3 = myTextureLoader3.load('ground.gif');
+      var material3 = new THREE.MeshBasicMaterial({ map: myTexture3});
+      var torus = new THREE.Mesh(geometry3, material3);
+      
+      // object 4
+      
+      var geometry4 = new THREE.CylinderGeometry(3,3,25,25);
+      var myTextureLoader4 = new THREE.TextureLoader();
+      var myTexture4 = myTextureLoader4.load('ground.gif');
+      var material4 = new THREE.MeshBasicMaterial({map: myTexture4});
+      var mid = new THREE.Mesh(geometry4, material4);
+      
+      // object 5
+      
+      var geometry5 = new THREE.BoxGeometry(13,13,13);
+      var myTextureLoader5 = new THREE.TextureLoader();
+      var myTexture5 = myTextureLoader5.load('ground.gif');
+      var material5 = new THREE.MeshBasicMaterial({map: myTexture5});
+      var midden = new THREE.Mesh(geometry5, material5);
+      
+      // object 6
+      
+      var geometry6 = new THREE.CylinderGeometry(3,3,25,25);
+      var myTextureLoader6 = new THREE.TextureLoader();
+      var myTexture6 = myTextureLoader6.load('ground.gif');
+      var material6 = new THREE.MeshBasicMaterial({map: myTexture6});
+      var mid2 = new THREE.Mesh(geometry6, material6);
+      
+      // object 7
+      
+      var geometry7 = new THREE.CylinderGeometry(3,3,25,25);
+      var myTextureLoader7 = new THREE.TextureLoader();
+      var myTexture7 = myTextureLoader7.load('ground.gif');
+      var material7 = new THREE.MeshBasicMaterial({map: myTexture7});
+      var mid3 = new THREE.Mesh(geometry7, material7);
+      
+      // object 8
+      
+      var geometry8 = new THREE.CylinderGeometry(3,3,25,25);
+      var myTextureLoader8 = new THREE.TextureLoader();
+      var myTexture8 = myTextureLoader8.load('ground.gif');
+      var material8 = new THREE.MeshBasicMaterial({map: myTexture8});
+      var mid4 = new THREE.Mesh(geometry8, material8);
+      
+      // object 9
+      
+      var geometry9 = new THREE.TorusKnotGeometry(12,3,100,16);
+      var myTextureLoader9 = new THREE.TextureLoader();
+      var myTexture9 = myTextureLoader9.load('ground.gif');
+      var material9 = new THREE.MeshBasicMaterial({map: myTexture9});
+      var randoms = new THREE.Mesh(geometry9, material9);
+      
+      // object 10
+
+      var geometry10 = new THREE.TorusGeometry(90,10,18,110);
+      var myTextureLoader10 = new THREE.TextureLoader();
+      var myTexture10 = myTextureLoader10.load('ground.gif');
+      var material10 = new THREE.MeshBasicMaterial({map: myTexture10});
+      var building1 = new THREE.Mesh(geometry10, material10);
+      
+      // object 11
+      
+      var geometry11 = new THREE.BoxGeometry(62,192,32);
+      var myTextureLoader11 = new THREE.TextureLoader();
+      var myTexture11 = myTextureLoader11.load('building1.jpg');
+      var material11 = new THREE.MeshBasicMaterial({map: myTexture11});
+      var building2 = new THREE.Mesh(geometry11, material11);
+      
+      // object 12
+      
+      var geometry12 = new THREE.BoxGeometry(72,150,32);
+      var myTextureLoader12 = new THREE.TextureLoader();
+      var myTexture12 = myTextureLoader12.load('building2.png');
+      var material12 = new THREE.MeshBasicMaterial({map: myTexture12});
+      var building3 = new THREE.Mesh(geometry12, material12);
+      
+      // object 13
+      
+      var geometry13 = new THREE.CylinderGeometry(30,30,240,42);
+      var myTextureLoader13 = new THREE.TextureLoader();
+      var myTexture13 = myTextureLoader13.load('building2.png');
+      var material13 = new THREE.MeshBasicMaterial({map: myTexture13});
+      var building4 = new THREE.Mesh(geometry13, material13);
+      
+      // object 14
+      
+      var geometry14 = new THREE.CylinderGeometry(30,30,200,42);
+      var myTextureLoader14 = new THREE.TextureLoader();
+      var myTexture14 = myTextureLoader14.load('ground.gif');
+      var material14 = new THREE.MeshBasicMaterial({map: myTexture14});
+      var building5 = new THREE.Mesh(geometry14, material14);
+      
+      // object 15
+      
+      var geometry15 = new THREE.ConeGeometry( 30, 90, 16 );
+      var myTextureLoader15 = new THREE.TextureLoader();
+      var myTexture15 = myTextureLoader15.load('ground.gif');
+      var material15 = new THREE.MeshBasicMaterial({ map: myTexture15});
+      var building6 = new THREE.Mesh(geometry15, material15);
+      
+      // object 16
+      
+      var geometry16 = new THREE.ConeGeometry( 24, 70, 36 );
+      var myTextureLoader16 = new THREE.TextureLoader();
+      var myTexture16 = myTextureLoader16.load('building1.jpg');
+      var material16 = new THREE.MeshBasicMaterial({ map: myTexture16});
+      var building7 = new THREE.Mesh(geometry16, material16);
+      
+      // object 17
+      
+      var geometry17 = new THREE.SphereGeometry( 75, 45, 36 );
+      var myTextureLoader17 = new THREE.TextureLoader();
+      var myTexture17 = myTextureLoader17.load('ground.gif');
+      var material17 = new THREE.MeshBasicMaterial({ map: myTexture17});
+      var building8 = new THREE.Mesh(geometry17, material17);
+      
+      // object 18
+      
+      var geometry18 = new THREE.ConeGeometry( 24, 70, 36 );
+      var myTextureLoader18 = new THREE.TextureLoader();
+      var myTexture18 = myTextureLoader18.load('building1.jpg');
+      var material18 = new THREE.MeshBasicMaterial({ map: myTexture18});
+      var building9 = new THREE.Mesh(geometry18, material18);
+      
+      // object 19
+      
+      var geometry19 = new THREE.ConeGeometry( 24, 70, 36 );
+      var myTextureLoader19 = new THREE.TextureLoader();
+      var myTexture19 = myTextureLoader19.load('building1.jpg');
+      var material19 = new THREE.MeshBasicMaterial({ map: myTexture19});
+      var building10 = new THREE.Mesh(geometry19, material19);
+      
+      // object 20
+      
+      var geometry20 = new THREE.ConeGeometry( 24, 70,36 );
+      var myTextureLoader20 = new THREE.TextureLoader();
+      var myTexture20 = myTextureLoader20.load('building1.jpg');
+      var material20 = new THREE.MeshBasicMaterial({ map: myTexture20});
+      var building11 = new THREE.Mesh(geometry20, material20);
+      
+      // object 21
+      
+      var geometry21 = new THREE.ConeGeometry( 36, 190, 16 );
+      var myTextureLoader21 = new THREE.TextureLoader();
+      var myTexture21 = myTextureLoader21.load('building1.jpg');
+      var material21 = new THREE.MeshBasicMaterial({ map: myTexture21});
+      var building12 = new THREE.Mesh(geometry21, material21);
+      
+      // object 22
+      
+      var geometry22 = new THREE.SphereGeometry(60, 11, 6 );
+      var myTextureLoader22 = new THREE.TextureLoader();
+      var myTexture22 = myTextureLoader22.load('ground.gif');
+      var material22 = new THREE.MeshBasicMaterial({ map: myTexture22});
+      var building13 = new THREE.Mesh(geometry22, material22);
+      
+      // object 23
+      
+      var geometry23 = new THREE.BoxGeometry(100,100,100);
+      var myTextureLoader23 = new THREE.TextureLoader();
+      var myTexture23 = myTextureLoader23.load('ground.gif');
+      var material23 = new THREE.MeshBasicMaterial({map: myTexture23});
+      var building14 = new THREE.Mesh(geometry23, material23);
+      
+      // object 24
+      
+      var geometry24 = new THREE.RingGeometry(10,15,32);
+      var myTextureLoader24 = new THREE.TextureLoader();
+      var myTexture24 = myTextureLoader24.load('ground.gif');
+      var material24 = new THREE.MeshBasicMaterial({map: myTexture24});
+      var fly1 = new THREE.Mesh(geometry24, material24);
+      
+      // object 25
+      
+      var geometry25 = new THREE.CylinderGeometry(3,3,25,25);
+      var myTextureLoader25= new THREE.TextureLoader();
+      var myTexture25 = myTextureLoader25.load('ground.gif');
+      var materia25 = new THREE.MeshBasicMaterial({map: myTexture25});
+      var fly2 = new THREE.Mesh(geometry25, materia25);
+      
+      // object 26
+      
+      var geometry26 = new THREE.CylinderGeometry(3,3,25,25);
+      var myTextureLoader26= new THREE.TextureLoader();
+      var myTexture26 = myTextureLoader26.load('ground.gif');
+      var materia26 = new THREE.MeshBasicMaterial({map: myTexture26});
+      var fly3 = new THREE.Mesh(geometry26, materia26);
+      
+      // object 27
+      
+      var geometry27 = new THREE.SphereGeometry( 10, 32, 16 );
+      var myTextureLoader27 = new THREE.TextureLoader();
+      var myTexture27 = myTextureLoader27.load('ground.gif');
+      var material27 = new THREE.MeshBasicMaterial({map: myTexture27});
+      var fly4 = new THREE.Mesh(geometry27, material27);
+      
+      // object 28
+      
+      var geometry28 = new THREE.TorusKnotGeometry(6,3,100,16);
+      var myTextureLoader28 = new THREE.TextureLoader();
+      var myTexture28 = myTextureLoader28.load('ground.gif');
+      var material28 = new THREE.MeshBasicMaterial({map: myTexture28});
+      var fly5 = new THREE.Mesh(geometry28, material28);
+      
+      // Skybox
+      
+      let materialArray = [];
+      
+      let texture_ft = new THREE.TextureLoader().load('idea.jpg');
+      let texture_bk = new THREE.TextureLoader().load('idea.jpg');
+      let texture_up = new THREE.TextureLoader().load('sky.jpg');
+      let texture_dn = new THREE.TextureLoader().load('idea.jpg');
+      let texture_rt = new THREE.TextureLoader().load('idea.jpg');
+      let texture_lf = new THREE.TextureLoader().load('idea.jpg');
+
+      materialArray.push(new THREE.MeshToonMaterial({map:texture_ft}));
+      materialArray.push(new THREE.MeshToonMaterial({map:texture_bk}));
+      materialArray.push(new THREE.MeshToonMaterial({map:texture_up}));
+      materialArray.push(new THREE.MeshToonMaterial({map:texture_dn}));
+      materialArray.push(new THREE.MeshToonMaterial({map:texture_rt}));
+      materialArray.push(new THREE.MeshToonMaterial({map:texture_lf}));
+      
+      for (let i = 0; i < 6; i++)
+      materialArray[i].side = THREE.BackSide;
+
+      var skyBoxG = new THREE.BoxGeometry( 2000, 2000, 2000 );
+      var skyBox = new THREE.Mesh (skyBoxG,materialArray);
+      scene.add(skyBox);
+      var light = new THREE.DirectionalLight("rgb(182,59,151)");
+      
+      var angle = 30;
+   
+      // Create renderer    
+
+      var renderer = new THREE.WebGLRenderer();
+
+      camera.position.z = 100;
+
+      light.position.set(0,0,0);
+      
+      torusknot.position.set(-50,70,0);
+      sphere.position.set(-120,120,-30);
+      torus.position.set(-50,70,0);
+      mid.position.set(112,140,8);
+      midden.position.set(120,140,0);
+      mid2.position.set(112,140,-8);
+      mid3.position.set(128,140,8);
+      mid4.position.set(128,140,-8);
+      randoms.position.set(120,300,30);
+      building1.position.set(-290,-105,0);
+      building2.position.set(-160,-110,0);
+      building3.position.set(-20,-130,0);
+      building4.position.set(-90,-86,0);
+      building5.position.set(55,-105,0);
+      building6.position.set(55,40,0);
+      building7.position.set(115,-168,50);
+      building8.position.set(178,-130,0);
+      building9.position.set(115,-168,-50);
+      building10.position.set(238,-168,50);
+      building11.position.set(238,-168,-50);
+      building12.position.set(-50,-115,80);
+      building13.position.set(49,-150,100);
+      building14.position.set(-150,-160,100);
+      fly1.position.set(-200,140,0);
+      fly2.position.set(-240,85,0);
+      fly3.position.set(-240,85,0);
+      fly4.position.set(180,70,0);
+      fly5.position.set(180,70,0);
+      
+      scene.add(light);
+      scene.add(torusknot);
+      scene.add(sphere);
+      scene.add(torus);
+      scene.add(mid);
+      scene.add(midden);
+      scene.add(mid2);
+      scene.add(mid3);
+      scene.add(mid4);
+      scene.add(randoms);
+      scene.add(building1);
+      scene.add(building2);
+      scene.add(building3);
+      scene.add(building4);
+      scene.add(building5);
+      scene.add(building6);
+      scene.add(building7);
+      scene.add(building8);
+      scene.add(building9);
+      scene.add(building10);
+      scene.add(building11);
+      scene.add(building12);
+      scene.add(building13);
+      scene.add(building14);
+      scene.add(fly1);
+      scene.add(fly2);
+      scene.add(fly3);
+      scene.add(fly4);
+      scene.add(fly5);
+      
+	  renderer.setPixelRatio(window.devicePixelRatio);
+   	  renderer.setSize(window.innerWidth, window.innerHeight);
+	  document.body.appendChild(renderer.domElement);
+	  window.addEventListener('resize', onWindowResize, false); 
+      var controls = new THREE.OrbitControls (camera, renderer.domElement);
+   
+      function cloudFun() {
+          var geom = new THREE.Geometry();
+          var material = new THREE.ParticleBasicMaterial({
+            size: 2,
+            vertexColors: true
+          });
+          var n = 1200;
+          for (var i = 0; i < 2000; i++) {
+            var particle = new THREE.Vector3(
+              (Math.random() - 0.5) * n,
+              (Math.random() - 0.5) * n,
+              (Math.random() - 0.5) * n
+            );
+            geom.vertices.push(particle);
+            let color_k = Math.random();
+            geom.colors.push(new THREE.Color(color_k, color_k, color_k * 2.0));
+          }
+          var cloud = new THREE.ParticleSystem(geom, material);
+          return cloud;
+        }
+
+function draw() {
+  
+	 //torusknot.rotation.y+= 0.01;
+	 //torusknot.rotation.x-= 0.01;
+   	 //torusknot.rotation.z+= 0.01;
+  torusknot.rotation.y+= -0.02;
+  sphere.rotation.y+= 0.01;
+  
+     //torus.rotatio+n.x+= 0.1;
+  torus.rotation.y+= 0.05;
+  mid.rotation.y+= 0.02;
+  mid2.rotation.y+= 0.02;
+  mid3.rotation.y+= 0.02;
+  mid4.rotation.y+= 0.02;
+  randoms.rotation.z+= 0.03;
+  building1.rotation.z+= 0.01;
+  building13.rotation.y+= 0.01;
+  building12.rotation.y+= -0.01;
+  fly1.rotation.y+= 0.03;
+  fly2.rotation.x+= 0.02;
+  fly3.rotation.z+= 0.01;
+  fly4.rotation.y+= 0.02;
+  fly5.rotation.z+= 0.02;
+  building7.rotation.y+= 0.01;
+  building9.rotation.y+= 0.01;
+  building10.rotation.y+= 0.01;
+  building11.rotation.y+= 0.01;
+  building8.rotation.y+= -0.01;
+  
+  camera.position.x= 10;
+     //camera.position.z=100;
+  angle += 0.005;
+   
+   var x  = 25 * Math.cos(angle);
+   var y = 25 * Math.cos(angle);
+   var z = 25 * Math.sin(angle);
+  
+  
+  randoms.position.set(x*-2.4,y+160,z*0.5);
+  sphere.position.set(x/8-30,y+90,z*2);
+  //mid.position.set(x*4.2,y,z+5);
+  // mid2.position.set(x*5.8,y,z-5);
+  //mid3.position.set(x*4.8,y,z+5);
+  //mid4.position.set(x*5.2,y,z-5);
+  //midden.position.set(x*5,y,z);
+  torus.position.set(x*1.5-30,y+120,z/1.2);
+  torusknot.position.set(x*1.5-30,y+120,z/1.2);
+  fly1.position.set(x-200,y+120,z*2);
+  fly4.position.set(x*-1.5+180,y+70,z*1.5);
+  fly5.position.set(x+180,y*1.5+70,z/1.5);
+    
+  controls.update();
+	 renderer.render(scene, camera);
+	 requestAnimationFrame(draw);
+}
+    
+function onWindowResize() {
+	camera.aspect = window.innerWidth / 		window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+}    
+  
+requestAnimationFrame(draw());
+      
+
+      
+	</script>
+</body>
+
+</html>
